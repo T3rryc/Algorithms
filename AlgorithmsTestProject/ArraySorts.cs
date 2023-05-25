@@ -18,6 +18,7 @@
 
         public static void MySort2(int[] array)
         {
+<<<<<<< HEAD
            // insertion sort
             for (var i = 1; i < array.Length; i++)
             {
@@ -29,6 +30,17 @@
                 }
             }
 
+=======
+            var current = array.ToList();
+            var result = new List<int>();
+            while (current.Count > 0)
+            {
+                var x = current.Min();
+                result.Add(x);
+                current.Remove(x);
+            }
+            result.CopyTo(array);
+>>>>>>> 1df71084b17dc8510368213545569bf37ece0e9c
         }
 
         public static void MergeSort(int[] array)
@@ -135,10 +147,12 @@
 
         public static void BubbleSort(int[] array)
         {
-            var swapped = false;
+            bool swapped;
             var n = array.Length;
             do
             {
+                swapped = false;
+
                 for (var i = 1; i < n; ++i)
                 {
                     if (array[i - 1] > array[i])
@@ -150,7 +164,7 @@
 
                 --n;
             } 
-            while (swapped);
+            while (swapped && n > 0);
         }
 
         public static void ShuffleSort(int[] array)
@@ -312,6 +326,15 @@
         public static void EvilSort(int[] array)
         {
             Array.Fill(array, 0);
+        }
+
+        public static void GnomeSort(int[] array)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void SelectionSort(int[] array)
+        {
         }
     }
 }
