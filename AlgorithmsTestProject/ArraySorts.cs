@@ -18,7 +18,7 @@
 
         public static void MySort2(int[] array)
         {
-<<<<<<< HEAD
+
            // insertion sort
             for (var i = 1; i < array.Length; i++)
             {
@@ -30,7 +30,7 @@
                 }
             }
 
-=======
+
             var current = array.ToList();
             var result = new List<int>();
             while (current.Count > 0)
@@ -40,7 +40,7 @@
                 current.Remove(x);
             }
             result.CopyTo(array);
->>>>>>> 1df71084b17dc8510368213545569bf37ece0e9c
+
         }
 
         public static void MergeSort(int[] array)
