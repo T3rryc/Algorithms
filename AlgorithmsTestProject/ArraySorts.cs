@@ -190,8 +190,10 @@
 
         public static void IntroSort(int[] array)
         {
-            throw new NotImplementedException();
-            
+            //throw new NotImplementedException();
+            Array.Sort(array);
+
+
 
         }
          
@@ -233,61 +235,107 @@
         public static void QuickSort(int[] array)
         {
             //throw new NotImplementedException();
-
-            
-
-
-
-
-              
+            QuickSort(array, 0, array.Length - 1);
         }
-     
-          
+
+        private static void QuickSort(int[] array, int left, int right)
+        {
+            if (left < right)
+            {
+                int pivotIndex = Partition(array, left, right);
+                QuickSort(array, left, pivotIndex - 1);
+                QuickSort(array, pivotIndex + 1, right);
+            }
+        }
+
+        private static int Partition(int[] array, int left, int right)
+        {
+            int pivot = array[right];
+            int i = left - 1;
+
+            for (int j = left; j < right; j++)
+            {
+                if (array[j] <= pivot)
+                {
+                    i++;
+                    Swap(array, i, j);
+                }
+            }
+
+            Swap(array, i + 1, right);
+
+            return i + 1;
+        }
+
+        private static void Swap(int[] array, int i, int j)
+        {
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+
+
+
 
         public static void BlockSort(int[] array)
         {
             //throw new NotImplementedException();
-            var n = array.Length;
-            var max = array[0];
-            var min = array[0];
-            for (var i = 1; i < n; i++)
+            int blockSize = (int)Math.Sqrt(array.Length);
+
+            // Sort each block
+            for (int i = 0; i < array.Length; i += blockSize)
             {
-                if (array[i] > max)
-                {
-                    max = array[i];
-                }
-                if (array[i] < min)
-                {
-                    min = array[i];
-                }
-            }
-            var range = max - min + 1;
-            var count = new int[range];
-            for (var i = 0; i < n; i++)
-            {
-                count[array[i] - min]++;
-            }
-            for (var i = 1; i < range; i++)
-            {
-                count[i] += count[i - 1];
-            }
-            var output = new int[n];
-            for (var i = n - 1; i >= 0; i--)
-            {
-                output[count[array[i] - min] - 1] = array[i];
-                count[array[i] - min]--;
-            }
-            for (var i = 0; i < n; i++)
-            {
-                array[i] = output[i];
+                int endIndex = Math.Min(i + blockSize - 1, array.Length - 1);
+                SortBlock(array, i, endIndex);
             }
 
+            // Merge sorted blocks
+            int mergeSize = blockSize;
+            while (mergeSize < array.Length)
+            {
+                for (int i = 0; i < array.Length; i += mergeSize * 2)
+                {
+                    int mid = Math.Min(i + mergeSize - 1, array.Length - 1);
+                    int end = Math.Min(i + mergeSize * 2 - 1, array.Length - 1);
+                    MergeBlocks(array, i, mid, end);
+                }
+                mergeSize *= 2;
+            }
         }
+        private static void SortBlock(int[] arr, int start, int end)
+        {
+            Array.Sort(arr, start, end - start + 1);
+        }
+        private static void MergeBlocks(int[] arr, int start, int mid, int end)
+        {
+            int[] merged = new int[end - start + 1];
+            int i = start;
+            int j = mid + 1;
+            int k = 0;
+
+            while (i <= mid && j <= end)
+            {
+                if (arr[i] <= arr[j])
+                    merged[k++] = arr[i++];
+                else
+                    merged[k++] = arr[j++];
+            }
+
+            while (i <= mid)
+                merged[k++] = arr[i++];
+
+            while (j <= end)
+                merged[k++] = arr[j++];
+
+            Array.Copy(merged, 0, arr, start, merged.Length);
+        }
+
+
 
         public static void BogoSort(int[] array)
         {
             //throw new NotImplementedException();
-            var n = array.Length;
+            
             while (!IsSorted(array))
             {
                 Shuffle(array);
@@ -330,11 +378,47 @@
 
         public static void GnomeSort(int[] array)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            var i = 1;
+            var j = 2;
+            while (i < array.Length)
+            {
+                if (array[i - 1] <= array[i])
+                {
+                    i = j;
+                    j++;
+                }
+                else
+                {
+                    ArrayProblems.Swap(array, i - 1, i);
+                    i--;
+                    if (i == 0)
+                    {
+                        i = j;
+                        j++;
+                    }
+                }
+            }
+
+
         }
 
         public static void SelectionSort(int[] array)
         {
+            //throw new NotImplementedException();
+            var n = array.Length;
+            for (var i = 0; i < n - 1; i++)
+            {
+                var min = i;
+                for (var j = i + 1; j < n; j++)
+                {
+                    if (array[j] < array[min])
+                    {
+                        min = j;
+                    }
+                }
+                ArrayProblems.Swap(array, min, i);
+            }
         }
     }
 }
