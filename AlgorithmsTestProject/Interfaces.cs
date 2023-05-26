@@ -53,6 +53,7 @@ public interface IIterator<T>
     T GetElement();
     bool HasValue();
     IIterator<T> GetNext();
+    IIterator<T> GetEnd();
 }
 
 public interface ISequence<T>

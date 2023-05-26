@@ -21,6 +21,12 @@ public class LinkedList<T> : IList<T>
 
         public IIterator<T> GetNext()
             => new Iterator(Node.Next);
+
+        public IIterator<T> GetEnd()
+        {
+            //throw new NotImplementedException();
+            return new Iterator(null);
+        }
     }
 
     public class Node
