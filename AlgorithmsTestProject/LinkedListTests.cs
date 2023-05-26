@@ -8,8 +8,20 @@ namespace AlgorithmsTestProject
 {
     public static class LinkedListTests
     {
-        public static int TestCount()
+        public static IList<int> CreateTestData()
         {
+            var list = new LinkedList<int>();
+            list.Prepend(3);
+            list.Prepend(2);
+            list.Prepend(1);
+            return list;
+        }
+
+        [Test]
+        public static void TestCount()
+        {
+            var list = CreateTestData();
+            Assert.AreEqual(3, list.Count());
         }
 
         public static void TestPrepend()
@@ -36,7 +48,7 @@ namespace AlgorithmsTestProject
         {
         }
 
-        public static Void TestEnumerate()
+        public static void TestEnumerate()
         {
         }
     }
