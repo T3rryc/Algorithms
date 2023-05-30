@@ -3,19 +3,30 @@ namespace AlgorithmsTestProject
 {
     public class Stack<T> : IStack<T>
     {
+        private List<T> item = new List<T>();
         public void Push(T x)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            item.Add(x);
+
+
+
+
+
         }
 
         public T Pop()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            item.RemoveAt(item.Count - 1);
+            item[item.Count - 1] = item[item.Count - 1];
+            return item[item.Count - 1];
         }
 
         public T Peek()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return item[item.Count - 1];
         }
 
         public bool IsEmpty { get; }
