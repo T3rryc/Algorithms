@@ -1,117 +1,59 @@
-﻿
+﻿using System.Security.Cryptography.X509Certificates;
+
 namespace AlgorithmsTestProject
 {
-    public class Stack<T> : IStack<T>
+    public static class LinkedListExercises
     {
-        private List<T> item = new List<T>();
-        public void Push(T x)
+        public static int Count<T>(this IList<T> self)
         {
-            //throw new NotImplementedException();
-            item.Add(x);
-
-
-
-
-
+            return self.Enumerate().Count();
         }
 
-        public T Pop()
+        public static void Prepend<T>(this IList<T> self, T x)
         {
-            //throw new NotImplementedException();
-            item.RemoveAt(item.Count - 1);
-            item[item.Count - 1] = item[item.Count - 1];
-            return item[item.Count - 1];
+            self.Insert(self.GetIterator(), x);
         }
 
-        public T Peek()
+        public static IIterator<T> GetLastIterator<T>(this IList<T> self)
         {
-            //throw new NotImplementedException();
-            return item[item.Count - 1];
+            var iter = self.GetIterator();
+            while (iter.HasValue())
+                iter = iter.GetNext();
+            return iter;
         }
 
-        public bool IsEmpty { get; }
-    }
-
-    public class Queue<T> : IQueue<T>
-    {
-        public void Enqueue(T x)
+        public static void Append<T>(this IList<T> self, T x)
         {
-            throw new NotImplementedException();
+            self.Insert(self.GetLastIterator(), x);
         }
 
-        public T Dequeue()
+        public static T GetAt<T>(this IList<T> self, int index)
         {
-            throw new NotImplementedException();
+            var i = 0;
+            var iter = self.GetIterator();
+            while (iter.HasValue() && i < index)
+            {
+                iter = iter.GetNext();
+                i += 1;
+            }
+
+            return iter.GetElement();
         }
 
-        public T Peek()
+        public static void SetAt<T>(this IList<T> self, int index, T element)
         {
             throw new NotImplementedException();
         }
 
-        public bool IsEmpty { get; }
-    }
-
-    public class PriorityQueue<T> : IPriorityQueue<T>
-    {
-        public void Enqueue(int priority, T element)
+        public static void Swap<T>(this IList<T> self, IIterator<T> a, IIterator<T> b)
         {
             throw new NotImplementedException();
         }
 
-        public T PeekHighestPriority()
+        public static IList<T> Reverse<T>()
         {
             throw new NotImplementedException();
+
         }
-
-        public T DequeueHighestPriority()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class QueueFromStack<T> : IQueue<T>
-    {
-        public readonly Stack<T> S1 = new();
-        public readonly Stack<T> S2 = new();
-
-        public void Enqueue(T x)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T Dequeue()
-        {
-            throw new NotImplementedException();
-        }
-
-        public T Peek()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsEmpty { get; }
-    }
-
-    public class StackFromQueue<T> : IStack<T>
-    {
-        public readonly Queue<T> Q1 = new();
-        public readonly Queue<T> Q2 = new();
-        public void Push(T x)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T Pop()
-        {
-            throw new NotImplementedException();
-        }
-
-        public T Peek()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsEmpty { get; }
     }
 }
