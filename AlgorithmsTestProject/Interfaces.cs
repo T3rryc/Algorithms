@@ -168,4 +168,8 @@ public interface IConsList<T>
     T Value { get; }
     bool IsEmpty { get; }
     IConsList<T> Rest { get; }
+    object Head { get; set; }
+    object Tail { get; set; }
+
+    object GetNext();
 }

@@ -17,12 +17,20 @@ public class ConsList<T> : IConsList<T>
     /// </summary>
     public bool IsEmpty 
         => this == Empty;
-    
+
+    object IConsList<T>.Head { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    object IConsList<T>.Tail { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+
+
+
     /// <summary>
     /// A static field containing a special value representing an empty list
     /// </summary>
     public static IConsList<T> Empty = new ConsList<T>();
-    
+    private object head;
+    private IConsList<T> consList;
+
     /// <summary>
     /// Constructor: sets the value and rest fields. 
     /// </summary>
@@ -36,6 +44,17 @@ public class ConsList<T> : IConsList<T>
     private ConsList()
         : this(default, null)
     { }
+
+    public ConsList(object head, IConsList<T> consList)
+    {
+        this.head = head;
+        this.consList = consList;
+    }
+
+    object IConsList<T>.GetNext()
+    {
+        throw new NotImplementedException();
+    }
 }
 
 public static class ConsListExtensions
@@ -210,5 +229,13 @@ public class ConsIntegerRange : IConsList<int>
 
     public IConsList<int> Rest
         => new ConsIntegerRange(From + 1, Count - 1);
+
+    object IConsList<int>.Head { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    object IConsList<int>.Tail { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    object IConsList<int>.GetNext()
+    {
+        throw new NotImplementedException();
+    }
 }
 
