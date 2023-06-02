@@ -1,4 +1,4 @@
-﻿namespace AlgorithmsTestProject;
+﻿﻿namespace AlgorithmsTestProject;
 
 
 public interface IStack<T>
@@ -160,7 +160,7 @@ public interface IStream<T>
 public interface IOutputStream<T>
 {
     void Close();
-    void Write(T x);
+    void Write(T x); 
 }
 
 public interface IConsList<T>
@@ -168,8 +168,11 @@ public interface IConsList<T>
     T Value { get; }
     bool IsEmpty { get; }
     IConsList<T> Rest { get; }
-    object Head { get; set; }
-    object Tail { get; set; }
-
-    object GetNext();
 }
+
+public interface IReadOnlyArray<T>
+{
+    int Count { get; }
+    T this[int index] { get; }
+}
+

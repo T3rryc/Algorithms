@@ -128,7 +128,9 @@ namespace AlgorithmsTestProject
             }
         }
 
-        public static IEnumerable<int> Merge(IEnumerable<int> xs, IEnumerable<int> ys)
+        public static IEnumerable<int> Merge(
+            IEnumerable<int> xs, 
+            IEnumerable<int> ys)
         {
             foreach (var x in xs)
             {
